@@ -1,6 +1,6 @@
 '''
 
-Making a design of new 3D V-shape transmons of 'StriplineGeometry'
+Making a design of new V-shape transmons of 'StriplineGeometry'
 and 'CircularGeometry'
 
 Code written for Python 2.7.10.
@@ -9,6 +9,32 @@ gdsCAD does not work with Python 3
 Script made by Vladimir Milchakov [ vladimir_ph@protonmail.com ]
 Jul-Oct 2020
 
+::Wafer5 COMMENTS::
+- Dose of pads increased from 9.5 to 9.8 C/m2 (comp to wafer3, wafer4)
+- dosetests removed
+- wires of 4probe-test-structures layer: 4->5. Than dose decreased from 12->10 C/m2
+- change width of Ljj to 200 nm back. (we need more resistance)
+- change deducted_x_wire_sift = 0.4->0.43 ~!(both in function gen_junction and in globals()). it corresponds to change bridge width: 200nm ->175nm
+- maybe the angle will be changed as well (but its still ok with this .gds)
+- changed back gap_X_JJ_to_L = 1.8->1.4  (long time ago were same)
+- changed squid_Loop_wid  = 1.94 -> 1.3 (to make possible to make small Ljj)
+
+::Wafer6 COMMENTS
+- made better symmetry of junctions by shifting it (but this function is disabled now)
+- increased width of horizontal microwire in hearts and in 4probe tests
+- SQUID size automatically decrease if length of junction in SQUID chain is too small to avoid cut
+
+::Wafer7 COMMENTS
+- add list_of_L_JJ_high_sizes to vary same time Length and High of Ljj (big junctions)
+- fix the problem with not full crosssection of small JJ Y by shifting X-wires (bigger bridge) "deducted_x_wire_sift"
+- increasing size of Big junctions x1,x2,x3,x4 of biggest of last time
+
+::Wafer8 COMMENTS
+- same design for two gemini wafers: "Wafer8-1" & "Wafer8-2"
+- make more dense JJ parameters (like wafer7ch16)
+- improved naming of folder with .njf files
+- (for next time) move chip30 structure (heartless) from this horrible spot, and merge two heartless chips to one
+- (for NT) !!! Pads_wires_Circulat|Stripline_HEARTLESS.npf does not exist now. (either prepare it, either set it same as normal ones in .njf file)
 '''
 
 from __future__ import division
@@ -17,9 +43,20 @@ import numpy as np
 import scipy.optimize
 import os
 
-
 ################################################################################
 #####______________Globals_________________________________________________#####
+
+##__adress_to_save_.gds-file__##
+name   = 'Wafer9'
+main_folder = 'D:\\Data\\=Exp_Data=\\DESIGNS\\Wafers\\' +name +'\\' +name+'_Structures\\'
+
+def createfolder(folder):
+    try:
+        os.stat(folder)
+    except:
+        os.mkdir(folder)
+    return True
+createfolder(main_folder)
 
 
 ##################################################################
@@ -112,9 +149,10 @@ SET THE MASK
 # Wafer2_Mask = BilayerMask(0.693, 0.230, 35, 0.020)
 # Wafer3_Mask = BilayerMask(0.692, 0.235, 35, 0.020)
 # Wafer4_Mask = BilayerMask(0.685, 0.228, 35, 0.0202)
-
-Wafer5_Mask = BilayerMask(0.674, 0.226, 35, 0.0202)
-ACTUAL_MASK = Wafer5_Mask
+# Wafer5_Mask = BilayerMask(0.674, 0.226, 35, 0.0202)
+# Wafer7_Mask = BilayerMask(0.697, 0.223, 35, 0.0202)
+Wafer8_Mask = BilayerMask(0.710, 0.220, 35, 0.0202)
+ACTUAL_MASK = Wafer8_Mask
 
 
 '''
@@ -124,31 +162,43 @@ SET THE AREAS
 ## Wafer_5 ##
 WITH_DOSETESTS = False
 N_SQUIDS        = 10
-IND_J_HIG       = 0.2 ##last time was 0.5
+# IND_J_HIG       = 0.2 ## scince wafer7 we define high of Ljj separately for each
 ################ _ reset manually same stuff (just avoiding negative width proj _ #####) ##direct length and width
-list_of_JJ_seizes   = [ 0.150, 0.190, 0.230, 0.270,
-                        0.150, 0.190, 0.230, 0.270,
-                        0.150, 0.190, 0.230, 0.270 ]
-list_of_L_JJ_seizes = [ 2.000, 2.000, 2.000, 2.000,
-                        3.000, 3.000, 3.000, 3.000,
-                        4.000, 4.000, 4.000, 4.000 ]  ##done/ with High=0.2 instead of 0.5 or 0.35 (as in old times)
 
+
+####__from_wafer7__####
+# list_of_JJ_seizes       = [ 0.180, 0.180,  0.180,  0.180,
+#                             0.240, 0.240,  0.240,  0.240,
+#                             0.300, 0.300,  0.300,  0.300 ]
+# list_of_L_JJ_seizes     = [ 3.800, 6.300, 6.300, 11.300,   ##took biggest from w6, and x1,x2,x3,x4
+#                             3.800, 6.300, 6.300, 11.300,
+#                             3.800, 6.300, 6.300, 11.300 ]
+# list_of_L_JJ_high_sizes = [ 0.20,  0.20,  0.30,   0.30,
+#                             0.20,  0.20,  0.30,   0.30,
+#                             0.20,  0.20,  0.30,   0.30  ]
+
+###__wafer7__###
+list_of_JJ_seizes       = [ 0.220, 0.220,  0.220,  0.220,
+                            0.230, 0.230,  0.230,  0.230,
+                            0.245, 0.245,  0.245,  0.245 ]
+list_of_L_JJ_seizes     = [ 5.800, 6.000, 6.200, 6.800,
+                            5.800, 6.000, 6.200, 6.800,
+                            5.800, 6.000, 6.200, 6.800 ]
+list_of_L_JJ_high_sizes = [ 0.210, 0.240, 0.280, 0.320,
+                            0.210, 0.240, 0.280, 0.320,
+                            0.210, 0.240, 0.280, 0.320  ]
 
 
 #####_________SIZE_OF_small_JJ_Transmon-test_________#####
-test_transmon_JJ_size_list = [ 0.190, 0.270, 0.350 ]
+test_transmon_JJ_size_list = [ 0.220, 0.230, 0.245 ]
 
 ################################################################################
 ################################################################################
+#
+#
+#
+#
 
-##__adress_to_save_.gds-file__##
-main_folder = 'D:\\Data\\=Exp_Data=\\DESIGNS\\Wafers\\Wafer5\\Wafer5_Structures\\'
-name   = 'Wafer5'
-
-#
-#
-#
-#
 
 ##_____________________________________________________________###
 
@@ -165,10 +215,10 @@ dose_dict_pads = {
 }
 
 ##_____test structures id's plan_____###
-id_test   =  10
-id_trans1 =  9
-id_trans2 =  27
-id_trans3 = 28
+id_test   =  26
+id_trans1 =  1
+id_trans2 =  6
+id_trans3 = 25
 id_NoHeart_Circle = 30
 id_NoHeart_Stripl = 29
 
@@ -182,12 +232,18 @@ NUM_CHIPS_WAF_VERTC = 5
 CHIP_X_SIZE = 5e3       ##[um]
 CHIP_Y_SIZE = 6.8e3     ##[um]
 
+WAFER_DIAMETER = 50.8e3 #um
+WAFER_EDGE = 15e3 #um
+ORIGIN_LEFT_LOW_MARKER = ( -( 400 +3*CHIP_X_SIZE - 0.5*WAFER_EDGE) +400, 7000) ##coordinates of marker from left low wafer corner
+
+
 HEART_SIZE =(40,100)
 
 SUB_WIRS_WIDTH = 0.35
-WIRS_UNDCT_WIDTH = 0.70 #0.70
-Y_JJ_UNDCT_WIDTH = 0.67 #0.68
-L_JJ_UNDCT_WIDTH = 0.73 #0.75
+SUB_WIRE_HORIZONTAL_TO_JJs = 0.45
+WIRS_UNDCT_WIDTH = 0.70
+Y_JJ_UNDCT_WIDTH = 0.67
+L_JJ_UNDCT_WIDTH = 0.73
 SUB_WIRS_PENET = 2 ## make wires penetrate other shapes, to have for sure galvanic contact [um]
 WIDWIRE_STPL_BIG = 20
 WIDWIRE_STPL_MED = 4
@@ -212,18 +268,19 @@ WIDTH_OF_SHORTCUT_L_WIRE = 1.0 ##[um]
 ### Technical details for heart ###
 gap_X_JJ_to_L           = 1.4  #1.8    ### X-shift both JJ from edge of Inductance #0.4
 horiz_wire_shift        = 1.0          ### Y-shift between Inductance and horis wire
-gap_JJ_to_horiz_wire    = 12.0  #0.6    ### Y-shift how far JJ is shifted from the edge
+gap_JJ_to_horiz_wire    = 8.0          ### Y-shift how far JJ is shifted from the edge
 
 ### inductance ###
 squid_Loop_hig  = 1.8
-squid_Loop_wid  = 1.3
+squid_Loop_wid  = 2.0 #1.3 ##wafer5 #1.9 ##allprev
 shapo_gap_hig   = 0.8
 squids_shift_X  = 0.27
 
 ### single junctions ###
-error_X_move    = 1.2
+error_X_move    = 1.2 ##[um]
 # deducted_x_wire_sift = 0.4
-deducted_x_wire_sift = 0.42
+# deducted_x_wire_sift = 0.42
+deducted_x_wire_sift = 0 ## crossection of Yjj - size of bridge
 JJ_coupler_heigh = 0.5 ##trapezoid high
 cap_wid = 0.05 #shapo undercut
 
@@ -237,6 +294,7 @@ Transmon_Gap = 200
 
 ##_______Layers_______##
 ##################################################################
+LAYER_WAFER     = 102
 LAYER_MARKS     = 101
 LAYER_SUB_WIRES = 1
 LAYER_SUB_UNDCT = 2
@@ -493,6 +551,12 @@ gen_rectangle = lambda (x0,y0), (SX,SY), layr: shapes.Rectangle( (x0,y0), (x0+SX
 
 
 #######________Returns cells_______________#####################################
+def gen_arrow_down_cell(layer):
+    cell = core.Cell('Arrow')
+    points = [ (0,0),(-100,100),(-100,150),(-30,100),(-30,250),(30,250),(30,100),(100,150),(100,100) ]
+    bdy = core.Boundary(points, layer=layer)
+    cell.add(bdy)
+    return cell
 
 def gen_rect_pad_cell(x0, y0, xsize, ysize, rad, name='Pad', layer=LAYER_PADS):
     '''
@@ -511,6 +575,10 @@ def gen_circle_pad_cell(x0, y0, rad):
     return cell
 
 def gen_arc_pads_cell(R_int, R_out, Sector, PushSect, X_c,Y_c):
+    '''
+    Sector= 2 == full circle, 1 == half
+    PushSect - rotation angle
+    '''
     cell = core.Cell('Pad')
     N_sectors = 30
     points = draw_sector_ring(N_sectors, rad1=R_int, rad2=R_out, theta1=np.pi*(1-Sector)/2, theta2=np.pi*(1+Sector)/2)
@@ -637,16 +705,6 @@ def gen_holes_net_in_ringsector( (X0,Y0), sect_rad_int, sect_rad_out, sector_ang
             cell.add(hole_0)
     return cell
 
-def draw_wafer_2inch():
-    Wafer_edge_cell = core.Cell('Wafer_edge')
-    Wafer_Radius   = 25.4 *1e3 #[um]
-    Wafer_center_x = (NUM_CHIPS_WAF_HORIZ *CHIP_X_SIZE) /2
-    Wafer_center_y = (NUM_CHIPS_WAF_VERTC *CHIP_Y_SIZE) /2
-    wafer_base_len = 19.1 *1e3 #[um]
-    wafer_theta_deg = np.degrees( np.arcsin(0.5*wafer_base_len/Wafer_Radius) )
-    Wafer_edge_cell.add(shapes.Circle((Wafer_center_x,Wafer_center_y), Wafer_Radius, 1, layer=0, initial_angle=270-wafer_theta_deg, final_angle=-90+wafer_theta_deg) )
-    return Wafer_edge_cell
-
 def gen_dosetest_rectangular(x0, y0, xsize, ysize, round_rad, layer):
     hole_brd = HOLES_RAD+NO_HOLES_BORDER
     cell = core.Cell('DosePad')
@@ -683,14 +741,6 @@ def shape_tests():
 
 ### Other necessary functions ###
 ################################################################################
-
-def createfolder(folder):
-    try:
-        os.stat(folder)
-    except:
-        os.mkdir(folder)
-    return True
-
 def my_date_yyyymmdd():
     def my_inttostr_twodigits(num):
         num = int(num)
@@ -735,9 +785,6 @@ def get_chip_position_from_number( num_of_chip ):
     '''
     ### checking ###
     num_of_chip = abs(int(num_of_chip))
-    if num_of_chip > NUM_CHIPS_WAF_HORIZ*NUM_CHIPS_WAF_VERTC:
-        print('\n!____not enough place on the wafer. Check num_of_chip or NUM_CHIPS_WAF_HORIZ or NUM_CHIPS_WAF_VERTC')
-        return (None, None)
     if num_of_chip<=0:
         print('\n!____num_of_chip must be > 0')
         return (None, None)
@@ -746,9 +793,11 @@ def get_chip_position_from_number( num_of_chip ):
     num_of_chip -= 1
 
     ### working ###
-    X_num = num_of_chip % NUM_CHIPS_WAF_HORIZ
-    Y_num = num_of_chip // NUM_CHIPS_WAF_HORIZ
+        ## chipposition
+    X_num = num_of_chip % 6
+    Y_num = num_of_chip // 6
 
+        ## coordinates ##
     X =  X_num*CHIP_X_SIZE
     Y = -Y_num*CHIP_Y_SIZE
 
@@ -760,6 +809,57 @@ def get_chip_position_from_number( num_of_chip ):
 ################################################################################
 ####____________GENERATING_CELLS_FUNCTIONS_____#################################
 ################################################################################
+
+def draw_wafer_2inch():
+    Wafer_edge_cell = core.Cell('Wafer_edge')
+    Wafer_Radius   = 25.4 *1e3 #[um]
+    Wafer_center_x = 3*CHIP_X_SIZE
+    Wafer_center_y = 2.5*CHIP_Y_SIZE
+    wafer_base_len = 19.1 *1e3 #[um]
+    wafer_theta_deg = np.degrees( np.arcsin(0.5*wafer_base_len/Wafer_Radius) )
+    Wafer_edge_cell.add(shapes.Circle((Wafer_center_x,Wafer_center_y), Wafer_Radius, 1, layer=0, initial_angle=270-wafer_theta_deg, final_angle=-90+wafer_theta_deg) )
+    Wafer_edge_cell = copy_and_translate_cell( Wafer_edge_cell, (-5450, 6536) )
+    return Wafer_edge_cell
+
+def gen_wafer_universal( x0=0,y0=0, wafer_diameter=WAFER_DIAMETER, edge_length=WAFER_EDGE, LAYER=LAYER_WAFER):
+    '''
+    Generating cell with wafer of given diameter and given edge length
+    takes:
+        coordinates of left low corner,
+        diameter,
+        legth of edge
+        and layout layer
+        ( all dimensions are in [um])
+    returns:
+        cell with wafer layout
+    '''
+    ##_calc_vars__##
+    R_WAFER = wafer_diameter/2
+    xc = x0 +0.5*edge_length
+    yc = y0 +np.sqrt(R_WAFER**2 -(0.5*edge_length)**2)
+    alpha = np.arcsin( (0.5*edge_length)/R_WAFER )
+    fraction = 1.0 -( 2*alpha / (2*np.pi) )
+    ###########_define_technical_parameters_####
+    lw = 0.002*R_WAFER #um
+    N_sectors = 100
+    [R_int, R_out, Sector] = [R_WAFER-lw, R_WAFER, 2*fraction]
+    #############_do_the_things_###
+    cell = core.Cell('wafer')
+    points = draw_sector_ring(N_sectors, rad1=R_int, rad2=R_out, theta1=np.pi*(1-Sector)/2, theta2=np.pi*(1+Sector)/2)
+    sector1 = core.Boundary(points, layer=LAYER)
+    cell.add(sector1)
+    cell = copy_and_translate_cell(cell, (xc,yc))
+    cell.add(gen_rectangle( (x0,y0), (edge_length,lw), LAYER))
+    return cell
+
+def gen_wafer_markers():
+    Wafer_marks = core.Cell('Wafer_marks')
+    Wafer_marks.add( gen_rectangle( (0 -400, 0 -200),        (-8,-8),  LAYER_MARKS) ) #left low
+    Wafer_marks.add( gen_rectangle( (0 -400, 34000 +200),    (-8, 8),  LAYER_MARKS) ) #left top
+    Wafer_marks.add( gen_rectangle( (30000 +400, 0 -200),    ( 8,-8),  LAYER_MARKS) ) #rigth low
+    Wafer_marks.add( gen_rectangle( (30000 +400, 34000 +200),( 8, 8),  LAYER_MARKS) ) #rigth top
+    Wafer_marks.add( gen_arrow_down_cell(LAYER_MARKS) )
+    return Wafer_marks
 
 def gen_mark_cell( chip_size_x, chip_size_y, size=25, position=(0,0), sqr_mk_size=8, sqr_mk_dist=200 ):
     (x0, y0) = position
@@ -1027,6 +1127,7 @@ def gen_junction( position_low_wire, JJ_wid, error_X_move=1.2, deducted_x_wire_s
     ## values calc ##
     limit_X_move = error_X_move / 2
     add_tail = limit_X_move / ( 2*SQRT2 )
+    # print '\n\n\n\n\n\n\n\n\nadd_tail=', add_tail
 
     Y_ovrlp_JJ = SQRT2*JJ_wid + 2*add_tail*COS45
     J_SY = 2*JJ_coupler_heigh + Y_ovrlp_JJ
@@ -1113,6 +1214,7 @@ def gen_inductance( position, N_squids, J_wid, J_hig, Loop_hig, Loop_wid, gap_hi
     '''
     Takes central postion of L
     '''
+
     sub_wire_wid = SUB_WIRS_WIDTH
     sub_wire_undct_wid = WIRS_UNDCT_WIDTH
     big_junction_undct = L_JJ_UNDCT_WIDTH
@@ -1121,6 +1223,9 @@ def gen_inductance( position, N_squids, J_wid, J_hig, Loop_hig, Loop_wid, gap_hi
     if N_squids %2 !=0:
         print '\n!____N_squids must be even number'
         N_squids +=1
+
+    if Loop_wid > (J_wid -2*sub_wire_wid ):
+        Loop_wid = J_wid -2*sub_wire_wid
 
     ### values ####
     (L_x0, L_y0) = position
@@ -1408,6 +1513,7 @@ def gen_heart_cell(position, JJ_wid_mask=0.2, ind_J_wid_mask=1.0, ind_J_hig_mask
     cell.add( SubUndct_cell )
     return cell
 
+
 ################################################################################
 
 def gen_holes_for_stripline_cell( param_stripline ):
@@ -1589,8 +1695,6 @@ def gen_test_structures_4probe(heart_cell, chip_size=(0,0), size_pads=SIZE_PADS,
 
 
     #######################__EXECUTION__###################
-    cell_ts1 = core.Cell('4probe')
-
     def move_heart_to_right_place(heart_cell, X_hrt, Y_hrt):
         magic_X_shift = -5 ### the problem - we don't know the width of Inductance here, but want to have a galvanic connection
         bb = heart_cell.bounding_box
@@ -1598,6 +1702,8 @@ def gen_test_structures_4probe(heart_cell, chip_size=(0,0), size_pads=SIZE_PADS,
         X_shift = -left +X_hrt +magic_X_shift
         Y_shift = -low  +Y_hrt
         return copy_and_translate_cell( heart_cell, (X_shift, Y_shift) )
+
+    cell_ts1 = core.Cell('4probe')
     heart_cell = move_heart_to_right_place( heart_cell, X_hrt, Y_hrt -SY_hrt/2 -TEST_WR_WID/2 )
     cell_ts1.add( heart_cell )
 
@@ -1613,7 +1719,7 @@ def gen_test_structures_4probe(heart_cell, chip_size=(0,0), size_pads=SIZE_PADS,
     # cell.add(cell_ts4)  ## top right corner
     return cell
 
-def gen_transmon_cell( param_transmon, JJ_wid_mask=0.05, w_big=WIDWIRE_TRANSMON, num_of_jj=1, num_of_L_SQUIDS=0, sub_wire_len=36, PRECISE_WIR_LEN=False ):
+def gen_transmon_cell( param_transmon, JJ_wid_mask=0.05, ind_j_hig=0.2, w_big=WIDWIRE_TRANSMON, num_of_jj=1, num_of_L_SQUIDS=0, sub_wire_len=36, PRECISE_WIR_LEN=False ):
     num_of_jj =int(abs(num_of_jj))
     num_of_L_SQUIDS = int(abs(num_of_L_SQUIDS))
 
@@ -1673,7 +1779,7 @@ def gen_transmon_cell( param_transmon, JJ_wid_mask=0.05, w_big=WIDWIRE_TRANSMON,
     else: ## (if we make an Inductance instead of JJ for test structures)
         cell_junction = core.Cell('Junction')
         # !V !V !V Troubles
-        JJ_cell = gen_inductance( position_low_wire, num_of_L_SQUIDS, JJ_wid_mask, IND_J_HIG, squid_Loop_hig, squid_Loop_wid, shapo_gap_hig, squids_shift_X )
+        JJ_cell = gen_inductance( position_low_wire, num_of_L_SQUIDS, JJ_wid_mask, ind_j_hig, squid_Loop_hig, squid_Loop_wid, shapo_gap_hig, squids_shift_X )
         ### shift ##
         bb = JJ_cell.bounding_box
         (jj_low, jj_top, jj_right, jj_left) = ( bb[0,1], bb[1,1], bb[1,0], bb[0,0])
@@ -1769,6 +1875,7 @@ def gen_transmon_cell( param_transmon, JJ_wid_mask=0.05, w_big=WIDWIRE_TRANSMON,
     cell_0.add( cell_sm_wires )
     cell_0.add( cell_bg_wires )
     return cell_0
+
 
 ################################################################################
 ################################################################################
@@ -1901,7 +2008,7 @@ def gen_test_junctions_chip_cell( name='Test_junctions_chains', list_chips=None)
                 sub_wire_len = subwir_len_techn + num_of_chain * delta_techn
                 Gap_i    = Gap    + num_of_chain * DELTA_LENGTH_TEST_LINE
                 SY_pad_i = SY_pad - (num_of_chain * DELTA_LENGTH_TEST_LINE)/2
-                struc_cell.add( gen_transmon_cell([Gap_i, SX_pad, SY_pad_i, SX_pad/2, Gap_i/2 +SY_pad_i], num_of_jj = i, JJ_wid_mask=JJ_wid_mask, sub_wire_len= sub_wire_len,    w_big=WIDWIRE_TEST_CHAINS, PRECISE_WIR_LEN=True ))
+                struc_cell.add( gen_transmon_cell([Gap_i, SX_pad, SY_pad_i, SX_pad/2, Gap_i/2 +SY_pad_i], num_of_jj=i,                         JJ_wid_mask=JJ_wid_mask,   ind_j_hig=ind_J_hig_mask,  sub_wire_len= sub_wire_len,    w_big=WIDWIRE_TEST_CHAINS, PRECISE_WIR_LEN=True ))
             else:
                 struc_cell.add( gen_transmon_cell([Gap,   SX_pad, SY_pad,   SX_pad/2, Gap/2   +SY_pad  ], num_of_jj = i, JJ_wid_mask=JJ_wid_mask, sub_wire_len=subwir_len_techn, w_big=WIDWIRE_TEST_CHAINS, PRECISE_WIR_LEN=True ))
             struc_cell = copy_and_translate_cell(struc_cell, ( i*(Distance +SX_pad), 0) )
@@ -1910,7 +2017,7 @@ def gen_test_junctions_chip_cell( name='Test_junctions_chains', list_chips=None)
         ###### SQUIDS TESTS ######
         for i in range(num_of_L_vary):
             struc_cell = core.Cell('test_struc'+str(i))
-            struc_cell.add( gen_transmon_cell([Gap, SX_pad, SY_pad, SX_pad/2, Gap/2 +SY_pad], num_of_jj=0, num_of_L_SQUIDS=2*(i+1), JJ_wid_mask=ind_J_wid_mask, sub_wire_len= subwir_len_techn, w_big=WIDWIRE_TEST_CHAINS, PRECISE_WIR_LEN=True ))
+            struc_cell.add( gen_transmon_cell([Gap, SX_pad, SY_pad, SX_pad/2, Gap/2 +SY_pad],            num_of_jj=0, num_of_L_SQUIDS=2*(i+1), JJ_wid_mask=ind_J_wid_mask, ind_j_hig=ind_J_hig_mask, sub_wire_len= subwir_len_techn, w_big=WIDWIRE_TEST_CHAINS, PRECISE_WIR_LEN=True ))
             struc_cell = copy_and_translate_cell(struc_cell, ( (num_of_jj_vary +i)*(Distance +SX_pad), 0) )
             chain_cell.add( struc_cell )
 
@@ -1932,15 +2039,13 @@ def gen_test_junctions_chip_cell( name='Test_junctions_chains', list_chips=None)
     cell_0.add( gen_mark_cell( CHIP_X_SIZE, CHIP_Y_SIZE ) )
     ### add boarders
     cell_0.add(copy_and_translate_cell( gen_basics_for_chain(), (X_shift, Y_shift) ))
-    cell_0.add(copy_and_translate_cell( gen_basics_for_chain(LABEL=True), (X_shift, CHIP_Y_SIZE -SY_pad -Y_shift ) ))
-
-
 
     ### KOSTIL !V!V!V !V !V KOSTIL
+    ## top labels ##
+    # cell_0.add(copy_and_translate_cell( gen_basics_for_chain(LABEL=True), (X_shift, CHIP_Y_SIZE -SY_pad -Y_shift ) ))
+    cell_0.add(copy_and_translate_cell( gen_basics_for_chain(LABEL=True), (X_shift, 3399 ) ))
+    ## bottom labels ##
     cell_0.add(copy_and_translate_cell( gen_basics_for_chain(LABEL=True), (X_shift, 50 ) ))
-
-
-
 
     ######
     done_already = lambda x, y, done_x_list, done_y_list : (x in done_x_list) and (y in done_y_list)
@@ -1949,6 +2054,13 @@ def gen_test_junctions_chip_cell( name='Test_junctions_chains', list_chips=None)
     counter = 0
     done_jj_areas  = []
     done_Ljj_areas = []
+
+    # print('\n\n\n\n\n')
+    # print 'LOOK HERE'
+    # for chip in list_chips:
+    #     print chip.num,'\t' ,chip.chiptype,'\t', chip.ind_J_hig,'\t', chip.ind_J_wid_mask,'\t'
+    # print('\n\n\n\n\n')
+
     for chip in list_chips:
         if not good_type(chip.chiptype):
             continue
@@ -1982,7 +2094,8 @@ class Chip:
         pass
         return None
 
-    def __init__(self, num, JJ_wid_mask, L_jj_len_mask, name=None, saveandlog=True):
+    def __init__(self, num, JJ_wid_mask, L_jj_sizes, name=None, saveandlog=True):
+
         self.num = num
         if name is None:
             self.name = str(self.num) +'_' +str(self.chiptype)
@@ -1995,9 +2108,20 @@ class Chip:
         ## small Y-junction ##
         self.JJ_wid_mask    = JJ_wid_mask
         ## big JJ of SQUID ##
-        self.ind_J_hig      = IND_J_HIG
+
+        ########################################## w6->w7 (two parameters of Ljj kostil !V)
+        [L_jj_len_mask, L_jj_high_mask]  = L_jj_sizes
+        self.ind_J_hig      = L_jj_high_mask
         self.ind_J_wid_mask = L_jj_len_mask
 
+        # if type(L_jj_sizes) == type([1,2]): ## !V KOSTIL FOR TRANSMON (TEST 2PROBE)
+        #     [L_jj_len_mask, L_jj_high_mask]  = L_jj_sizes
+        # else:
+        #     L_jj_len_mask = L_jj_sizes
+        #     L_jj_high_mask = 0.2
+
+        # self.ind_J_hig      = IND_J_HIG
+        ##########################################
 
         ### Projected areas:
         ## small jj
@@ -2005,7 +2129,7 @@ class Chip:
         self.jj_area    = JJ_wid1*JJ_wid2
         ## big Ljj
         self.l_jj_area  = ACTUAL_MASK.Area_of_Big_junction_from_sizes_of_mask(self.ind_J_wid_mask, self.ind_J_hig)
-        self.ind_J_wid_proj = self.l_jj_area /IND_J_HIG
+        self.ind_J_wid_proj = self.l_jj_area /self.ind_J_hig
 
 
 
@@ -2052,7 +2176,11 @@ class Chip:
         else:
             logline += '\t'+'None'
 
-        logline += '\t'+str(round( IND_J_HIG, Ndigits )) ## width of Ljj (mask = real)
+        if self.ind_J_wid_mask is not None:
+            pass
+            logline += '\t'+str(round( self.ind_J_hig, Ndigits )) ## width of Ljj (mask = real)
+        else:
+            logline += '\t'+'None'
 
         if self.jj_area is not None:
             [JJ_w1, JJ_w2] = ACTUAL_MASK.Expected_width_of_small_Y_junction_from_width_of_mask(self.JJ_wid_mask )
@@ -2133,18 +2261,100 @@ def build_wafer():
     '''
     Make main_folder with each .gds for each chip + .gds with all wafer in one for user
     '''
+    def chipposition_from_chipnumber(chip_num):
+        '''
+        returns chip position in the grid by its number
+        number:
+              |31|32|
+        |25|26|27|28|29|30|
+     |33|19|20|21|22|23|24|36|
+  |39|34|13|14|15|16|17|18|37|40|
+     |35|07|08|09|10|11|12|38|
+        |01|02|03|04|05|06|
+
+        postion: [X,Y]
+              |25|35|
+        |04|14|24|34|44|54|
+    |-13|03|13|23|33|43|53|63|
+|-22|-12|02|12|22|32|42|52|62|72|
+    |-11|01|11|21|31|41|51|61|
+        |00|10|20|30|40|50|
+        '''
+         #CHECK
+        if chip_num<1 or chip_num>40:
+            print 'ERROR OF SAMPLE NUMBER'
+            return (None, None)
+
+        chip_num = chip_num -1  #to start chips from "one" not "zero"
+
+        if 0<=chip_num<=29:     ## simple case inside wafer
+            X_pos = chip_num % 6
+            Y_pos = chip_num // 6
+        ## manual cases additional samples
+            ## top couple
+        elif chip_num==31-1:
+                (X_pos, Y_pos) = (2, 5)
+        elif chip_num==32-1:
+                (X_pos, Y_pos) = (3, 5)
+            ## left triple
+        elif chip_num==33-1:
+                (X_pos, Y_pos) = (-1, 3)
+        elif chip_num==34-1:
+                (X_pos, Y_pos) = (-1, 2)
+        elif chip_num==35-1:
+                (X_pos, Y_pos) = (-1, 1)
+            ## right triple
+        elif chip_num==36-1:
+                (X_pos, Y_pos) = (6, 3)
+        elif chip_num==37-1:
+                (X_pos, Y_pos) = (6, 2)
+        elif chip_num==38-1:
+                (X_pos, Y_pos) = (6, 1)
+            ## edge left
+        elif chip_num==39-1:
+                (X_pos, Y_pos) = (-2, 2)
+            ## edge right
+        elif chip_num==40-1:
+                (X_pos, Y_pos) = (7, 2)
+        else:
+            (X_pos, Y_pos) = (None, None)
+
+
+        return (X_pos, Y_pos)
+
+    def coordinates_from_chipposition(X_pos, Y_pos):
+            '''
+            takes chipposition in the grid (can be given by chipposition_from_chipnumber() )
+            and returns the real coordinates in [nm] for build a wafer and .njf file
+            '''
+            X =  X_pos*CHIP_X_SIZE
+            Y =  Y_pos*CHIP_Y_SIZE
+            return (X,Y)
+
+    def coordinates_from_chipnumber(chip_num):
+        '''
+        uses functions:
+        chipposition_from_chipnumber()
+        coordinates_from_chipposition()
+        to return coordinates of left low corner of the chip by it's number
+        '''
+        (X_pos, Y_pos) = chipposition_from_chipnumber(chip_num)
+        print '(X_pos, Y_pos)=',(X_pos, Y_pos)
+        (X,Y) = coordinates_from_chipposition(X_pos, Y_pos)
+        return (X,Y)
+    ############################################
+
     def move_to_position(cell_0, chip_num):
         '''
         function for moving chip-cell onto wafer, to put rhem all in one .gds-file
         '''
-        ( X_chip, Y_chip ) = get_chip_position_from_number(chip_num)
+        ( X_chip, Y_chip ) = coordinates_from_chipnumber(chip_num)
         if X_chip is None or Y_chip is None:
             return core.Cell('None')
         print '_____STRIPLINE IS DONE______\n'
         return copy_and_translate_cell( cell_0, (X_chip, Y_chip) )
 
     Wafer = core.Cell('Wafer')
-    Wafer.add( draw_wafer_2inch() )
 
     all_chips = []
 
@@ -2156,7 +2366,8 @@ def build_wafer():
         else:
             print '\n\n\n ATTENTION! ERROR OF CHIPNUM FOR REMOVE \n check id_test, id_trans etc'
             return list_of_chips
-    total_number_of_chips = NUM_CHIPS_WAF_HORIZ *NUM_CHIPS_WAF_VERTC
+    # total_number_of_chips = NUM_CHIPS_WAF_HORIZ *NUM_CHIPS_WAF_VERTC
+    total_number_of_chips = 30 #!V !V magic_number
     list_all_chip_ids = range(1, total_number_of_chips+1, 1)
     list_all_chip_ids = remove_chip_from_list(id_test           , list_all_chip_ids)
     list_all_chip_ids = remove_chip_from_list(id_trans1         , list_all_chip_ids)
@@ -2171,8 +2382,10 @@ def build_wafer():
     j = 0
     for i in range(len(list_of_JJ_seizes)):
         ###
-        jj_size   = list_of_JJ_seizes[i]
-        l_jj_size = list_of_L_JJ_seizes[i]
+        jj_size     = list_of_JJ_seizes[i]
+        l_jj_length = list_of_L_JJ_seizes[i]
+        l_jj_high   = list_of_L_JJ_high_sizes[i]
+        l_jj_size   = [l_jj_length, l_jj_high]
         ######
         chip = StriplineChip( list_all_chip_ids[j]  , jj_size, l_jj_size)
         all_chips.append(chip)
@@ -2192,26 +2405,75 @@ def build_wafer():
     Wafer.add( move_to_position(chip.cell, chip.num) )
 
     ##__________## Transmons _____________##
-    chip = TransmonChip(id_trans1, test_transmon_JJ_size_list[0], 0)
+    chip = TransmonChip(id_trans1, test_transmon_JJ_size_list[0], [0,0])
+    # chip = TransmonChip(id_trans1,0.4,[2.1,0.3])
     all_chips.append(chip)
     Wafer.add( move_to_position(chip.cell, chip.num) )
 
-    chip = TransmonChip(id_trans2, test_transmon_JJ_size_list[1], 0)
+    chip = TransmonChip(id_trans2, test_transmon_JJ_size_list[1], [0,0])
     all_chips.append(chip)
     Wafer.add( move_to_position(chip.cell, chip.num) )
 
-    chip = TransmonChip(id_trans3, test_transmon_JJ_size_list[2], 0)
+    chip = TransmonChip(id_trans3, test_transmon_JJ_size_list[2], [0,0])
     all_chips.append(chip)
     Wafer.add( move_to_position(chip.cell, chip.num) )
 
     ##__________## Heartless samples______##
-    chip = HearlessStriplineChip( id_NoHeart_Stripl, 0, 0)
+    chip = HearlessStriplineChip( id_NoHeart_Stripl, 0, [0,0])
     all_chips.append(chip)
     Wafer.add( move_to_position(chip.cell, chip.num) )
 
-    chip = HearlessCircularChip( id_NoHeart_Circle,  0, 0)
+    chip = HearlessCircularChip( id_NoHeart_Circle,  0, [0,0])
     all_chips.append(chip)
     Wafer.add( move_to_position(chip.cell, chip.num) )
+
+    ##____Additional markers, arrows, etc_##
+    Wafer.add( gen_wafer_markers() )
+    # Wafer.add( gen_wafer_universal(x0=5396, y0=-6004) ) #it was this!
+    Wafer.add( gen_wafer_universal( x0=-ORIGIN_LEFT_LOW_MARKER[0], y0=-ORIGIN_LEFT_LOW_MARKER[1] ))
+
+    ### try new slots
+    ####___Generate_test_structures___####
+    chip = TestJunctionsChip(31, all_chips)
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 31) )
+
+    chip = HearlessCircularChip( 32,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 32) )
+
+    chip = HearlessCircularChip( 33,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 33) )
+
+    chip = HearlessCircularChip( 34,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 34) )
+
+    chip = HearlessCircularChip( 35,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 35) )
+
+    chip = HearlessCircularChip( 36,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 36) )
+
+    chip = HearlessCircularChip( 37,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 37) )
+
+    chip = HearlessCircularChip( 38,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 38) )
+
+    chip = HearlessCircularChip( 39,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 39) )
+
+    chip = HearlessCircularChip( 40,  0, [0,0])
+    all_chips.append(chip)
+    Wafer.add( move_to_position(chip.cell, 40) )
+
 
     #################
     layout = core.Layout('LIBRARY')
@@ -2350,6 +2612,7 @@ def prepare_NJF_file(NJF_FILE_NAME, FOLDER_PATTERNS, PATTERNS, ID_FILES_DICT, DO
 all_chips = build_wafer()
 
 local_litho_dir = my_date_yyyymmdd()[2:] #FORMAT YYMMDD
+local_litho_dir=local_litho_dir+'_Vladimir_' +name +'_struc'
 folder_with_npf = 'nicolasroch/' +local_litho_dir+'/'
 
 '''

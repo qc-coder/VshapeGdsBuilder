@@ -1,0 +1,842 @@
+### Wafer9 Hearts  20210324
+
+###------------------------------------------------------------###
+###____________START___________________________________________###
+###------------------------------------------------------------###
+
+.global
+#registration	(0, 34 400 000)	(30 800 000, 34 400 000)
+registration	(0,0)			(30 800 000, 0)
+marktype		sqr8n
+focus			auto
+.end
+
+
+###------------------------------------------------------------###
+###____________BLOCKS__________________________________________###
+###------------------------------------------------------------###
+
+#Chip:1 (Hrts_01)
+.block
+origin			( 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_01		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:2 (Hrts_02)
+.block
+origin			(5 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_02		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:3 (Hrts_03)
+.block
+origin			(10 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_03		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:4 (Hrts_04)
+.block
+origin			(15 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_04		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:5 (Hrts_05)
+.block
+origin			(20 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_05		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:6 (Hrts_06)
+.block
+origin			(25 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_06		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:7 (Hrts_07)
+.block
+origin			( 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_07		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:8 (Hrts_08)
+.block
+origin			(5 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_08		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:9 (Hrts_09)
+.block
+origin			(10 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_09		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:10 (Hrts_10)
+.block
+origin			(15 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_10		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:11 (Hrts_11)
+.block
+origin			(20 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_11		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:12 (Hrts_12)
+.block
+origin			(25 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_12		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:13 (Hrts_13)
+.block
+origin			( 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_13		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:14 (Hrts_14)
+.block
+origin			(5 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_14		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:15 (Hrts_15)
+.block
+origin			(10 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_15		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:16 (Hrts_16)
+.block
+origin			(15 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_16		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:17 (Hrts_17)
+.block
+origin			(20 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_17		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:18 (Hrts_18)
+.block
+origin			(25 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_18		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:19 (Hrts_19)
+.block
+origin			( 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_19		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:20 (Hrts_20)
+.block
+origin			(5 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_20		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:21 (Hrts_21)
+.block
+origin			(10 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_21		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:22 (Hrts_22)
+.block
+origin			(15 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_22		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:23 (Hrts_23)
+.block
+origin			(20 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_23		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:24 (Hrts_24)
+.block
+origin			(25 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_24		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:25 (Hrts_25)
+.block
+origin			( 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_25		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:26 (Hrts_26)
+.block
+origin			(5 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_26		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:27 (Hrts_27)
+.block
+origin			(10 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_27		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:28 (Hrts_28)
+.block
+origin			(15 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_28		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:29 (Hrts_29)
+.block
+origin			(20 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_29		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:30 (Hrts_30)
+.block
+origin			(25 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		5
+pattern			Hrts_30		(0,0)
+.end
+
+##-----------------------------------------
+
+
+###------------------------------------------------------------###
+###____________PATTERNS________________________________________###
+###------------------------------------------------------------###
+
+.pattern
+id		Hrts_01
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/1_Transmon.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_02
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/2_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_03
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/3_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_04
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/4_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_05
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/5_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_06
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/6_Transmon.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_07
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/7_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_08
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/8_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_09
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/9_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_10
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/10_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_11
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/11_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_12
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/12_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_13
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/13_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_14
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/14_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_15
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/15_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_16
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/16_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_17
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/17_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_18
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/18_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_19
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/19_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_20
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/20_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_21
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/21_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_22
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/22_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_23
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/23_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_24
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/24_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_25
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/25_Transmon.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_26
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/26_TestJunctions.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_27
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/27_Stripline.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_28
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/28_Circular.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_29
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/29_Stripline_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_30
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/30_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_31
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/31_TestJunctions.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_32
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/32_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_33
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/33_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_34
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/34_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_35
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/35_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_36
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/36_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_37
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/37_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_38
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/38_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_39
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/39_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Hrts_40
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/40_Circular_heartless.npf
+dose		1		2.2
+dose		2		0.6
+.end
+
+##-----------------------------------------
+
+
+###------------------------------------------------------------###
+###____________ENDER___________________________________________###
+###------------------------------------------------------------###
+
+
+.write
+current 		auto
+.end

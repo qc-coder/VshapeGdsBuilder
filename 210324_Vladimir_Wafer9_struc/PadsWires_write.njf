@@ -1,0 +1,542 @@
+### Wafer9 PadsWires  20210324
+
+###------------------------------------------------------------###
+###____________START___________________________________________###
+###------------------------------------------------------------###
+
+.global
+#registration	(0, 34 400 000)	(30 800 000, 34 400 000)
+registration	(0,0)			(30 800 000, 0)
+marktype		sqr8n
+focus			auto
+.end
+
+
+###------------------------------------------------------------###
+###____________BLOCKS__________________________________________###
+###------------------------------------------------------------###
+
+#Chip:1 (Transmon)
+.block
+origin			( 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Transmon		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:2 (Stripline)
+.block
+origin			(5 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:3 (Circular)
+.block
+origin			(10 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:4 (Stripline)
+.block
+origin			(15 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:5 (Circular)
+.block
+origin			(20 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:6 (Transmon)
+.block
+origin			(25 400 000,	27 400 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Transmon		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:7 (Stripline)
+.block
+origin			( 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:8 (Circular)
+.block
+origin			(5 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:9 (Stripline)
+.block
+origin			(10 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:10 (Circular)
+.block
+origin			(15 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:11 (Stripline)
+.block
+origin			(20 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:12 (Circular)
+.block
+origin			(25 400 000,	20 600 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:13 (Stripline)
+.block
+origin			( 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:14 (Circular)
+.block
+origin			(5 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:15 (Stripline)
+.block
+origin			(10 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:16 (Circular)
+.block
+origin			(15 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:17 (Stripline)
+.block
+origin			(20 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:18 (Circular)
+.block
+origin			(25 400 000,	13 800 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:19 (Stripline)
+.block
+origin			( 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:20 (Circular)
+.block
+origin			(5 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:21 (Stripline)
+.block
+origin			(10 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:22 (Circular)
+.block
+origin			(15 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:23 (Stripline)
+.block
+origin			(20 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:24 (Circular)
+.block
+origin			(25 400 000,	7 000 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:25 (Transmon)
+.block
+origin			( 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Transmon		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:26 (TestJunctions)
+.block
+origin			(5 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			TestJunctions		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:27 (Stripline)
+.block
+origin			(10 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:28 (Circular)
+.block
+origin			(15 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:29 (Stripline_heartless)
+.block
+origin			(20 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Stripline_heartless		(0,0)
+.end
+
+##-----------------------------------------
+
+#Chip:30 (Circular_heartless)
+.block
+origin			(25 400 000,	 200 000)
+registration	( 200 000,	6 600 000)	(4 800 000,	6 600 000)
+registration	( 200 000,	 200 000)	(4 800 000,	 200 000)
+marktype		sqr8N
+focus			map1
+stepsize		(5 000 000,	6 800 000)
+grid			(1, 1)
+base_dose		1
+pattern			Circular_heartless		(0,0)
+.end
+
+##-----------------------------------------
+
+
+###------------------------------------------------------------###
+###____________PATTERNS________________________________________###
+###------------------------------------------------------------###
+
+.pattern
+id		Circular
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/PadsWires_Circular.npf
+dose		4		11
+dose		5		10
+dose		6		10
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Circular_heartless
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/PadsWires_Circular_heartless.npf
+dose		4		11
+dose		5		10
+dose		6		10
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Stripline
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/PadsWires_Stripline.npf
+dose		4		11
+dose		5		10
+dose		6		10
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Stripline_heartless
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/PadsWires_Stripline_heartless.npf
+dose		4		11
+dose		5		10
+dose		6		10
+.end
+
+##-----------------------------------------
+
+.pattern
+id		TestJunctions
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/PadsWires_TestJunctions.npf
+dose		4		11
+dose		5		10
+dose		6		10
+.end
+
+##-----------------------------------------
+
+.pattern
+id		Transmon
+filename		nicolasroch/210324_Vladimir_Wafer9_struc/PadsWires_Transmon.npf
+dose		4		11
+dose		5		10
+dose		6		10
+.end
+
+##-----------------------------------------
+
+
+###------------------------------------------------------------###
+###____________ENDER___________________________________________###
+###------------------------------------------------------------###
+
+
+.write
+current 		auto
+.end
