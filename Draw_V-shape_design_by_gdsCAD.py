@@ -551,10 +551,48 @@ gen_rectangle = lambda (x0,y0), (SX,SY), layr: shapes.Rectangle( (x0,y0), (x0+SX
 
 
 #######________Returns cells_______________#####################################
-def gen_arrow_down_cell(layer):
-    cell = core.Cell('Arrow')
+def gen_arrow_cell(layer, origin=(0,0), direction='down', size=1.0):
+    '''
+    Making an arrow of given direction
+    ( direction = 'up', 'down', 'left', 'right',  'up-left', 'up-right', 'down-left', 'down-right' )
+    size = 200 x 250 um
+    returns cell
+    '''
+    direction = str(direction)
+    if direction not in ['up', 'down', 'left', 'right',  'up-left', 'up-right', 'down-left', 'down-right']:
+        print('Error of gen_arrow_cell() wrong parameter direction')
+        return None
+
     points = [ (0,0),(-100,100),(-100,150),(-30,100),(-30,250),(30,250),(30,100),(100,150),(100,100) ]
-    bdy = core.Boundary(points, layer=layer)
+
+    points_sized = []
+    for p in points:
+        p_sized = (p[0]*size, p[1]*size)
+        points_sized.append(p_sized)
+
+    bdy = core.Boundary(points_sized, layer=layer)
+    if direction=='down':
+        pass
+    elif direction=='up':
+        bdy = bdy.rotate(180)
+    elif direction=='left':
+        bdy = bdy.rotate(-90)
+    elif direction=='right':
+        bdy = bdy.rotate(90)
+
+    elif direction=='up-left':
+        bdy = bdy.rotate(180+45)
+    elif direction=='up-right':
+        bdy = bdy.rotate(180-45)
+    elif direction=='down-left':
+        bdy = bdy.rotate(-45)
+    elif direction=='down-right':
+        bdy = bdy.rotate(45)
+
+
+    bdy.translate(origin)
+
+    cell = core.Cell('Arrow_'+direction)
     cell.add(bdy)
     return cell
 
@@ -852,13 +890,50 @@ def gen_wafer_universal( x0=0,y0=0, wafer_diameter=WAFER_DIAMETER, edge_length=W
     cell.add(gen_rectangle( (x0,y0), (edge_length,lw), LAYER))
     return cell
 
-def gen_wafer_markers():
+def gen_wafer_markers(sqr_mk_size=8):
     Wafer_marks = core.Cell('Wafer_marks')
-    Wafer_marks.add( gen_rectangle( (0 -400, 0 -200),        (-8,-8),  LAYER_MARKS) ) #left low
-    Wafer_marks.add( gen_rectangle( (0 -400, 34000 +200),    (-8, 8),  LAYER_MARKS) ) #left top
-    Wafer_marks.add( gen_rectangle( (30000 +400, 0 -200),    ( 8,-8),  LAYER_MARKS) ) #rigth low
-    Wafer_marks.add( gen_rectangle( (30000 +400, 34000 +200),( 8, 8),  LAYER_MARKS) ) #rigth top
-    Wafer_marks.add( gen_arrow_down_cell(LAYER_MARKS) )
+    Wafer_marks.add( gen_rectangle( (0 -400, 0 -200),        (-sqr_mk_size,-sqr_mk_size),  LAYER_MARKS) ) #left low
+    Wafer_marks.add( gen_rectangle( (0 -400, 34000 +200),    (-sqr_mk_size, sqr_mk_size),  LAYER_MARKS) ) #left top
+    Wafer_marks.add( gen_rectangle( (30000 +400, 0 -200),    ( sqr_mk_size,-sqr_mk_size),  LAYER_MARKS) ) #rigth low
+    Wafer_marks.add( gen_rectangle( (30000 +400, 34000 +200),( sqr_mk_size, sqr_mk_size),  LAYER_MARKS) ) #rigth top
+
+    #######__arrows to markers__#######
+    gap_btw_ar = 200
+    ar_length = 250
+    ### vertical traces ###
+    for i in range(5):
+        # left low marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='up', origin=(-400-sqr_mk_size/2,  -200-sqr_mk_size -(i+1)*gap_btw_ar -i*ar_length )))
+        # right low marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='up', origin=(30400+sqr_mk_size/2, -200-sqr_mk_size -(i+1)*gap_btw_ar -i*ar_length )))
+    for i in range(6):
+        # left up marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', origin=(-400-sqr_mk_size/2,  34000+sqr_mk_size +(i+2)*gap_btw_ar +(i+0)*ar_length )))
+        # right up marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', origin=(30400+sqr_mk_size/2, 34000+sqr_mk_size +(i+2)*gap_btw_ar +(i+0)*ar_length )))
+    ### horizontal traces ###
+    for i in range(6):
+        # left low marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='right', origin=(-400-sqr_mk_size/2 -(i+1)*gap_btw_ar -i*ar_length,  -200-sqr_mk_size/2 )))
+        # right low marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='left',  origin=(30400+sqr_mk_size/2 +(i+1)*gap_btw_ar +i*ar_length,  -200-sqr_mk_size/2 )))
+    for i in range(6):
+        # left up marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='right', origin=(-400-sqr_mk_size/2 -(i+1)*gap_btw_ar -i*ar_length,   34200+sqr_mk_size/2 )))
+        # right up marker
+        Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='left',  origin=(30400+sqr_mk_size/2 +(i+1)*gap_btw_ar +i*ar_length,  34200+sqr_mk_size/2 )))
+
+    #######__arrows_aligment_wafer_big__#######
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='up', size=2.5, origin=(15000, 42500 )))
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='up', size=2.5, origin=(15000, 42500-700 )))
+
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', size=2.5, origin=(15000, -6800 )))
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', size=2.5, origin=(15000, -6800+800 )))
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', size=2.5, origin=(15000, -6800+800*2 )))
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', size=2.5, origin=(15000, -6800+800*3 )))
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', size=2.5, origin=(15000, -6800+800*4 )))
+    Wafer_marks.add(gen_arrow_cell(LAYER_MARKS, direction='down', size=2.5, origin=(15000, -6800+800*5 )))
+
     return Wafer_marks
 
 def gen_mark_cell( chip_size_x, chip_size_y, size=25, position=(0,0), sqr_mk_size=8, sqr_mk_dist=200 ):
